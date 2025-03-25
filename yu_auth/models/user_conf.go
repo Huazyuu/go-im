@@ -9,7 +9,7 @@ import (
 type UserConfModel struct {
 	models.Model
 	UserID    uint    `json:"userID"`
-	RecallMsg *string `json:"recallMsg"` // 撤回消息提示内容
+	RecallMsg *string `gorm:"size:32" json:"recallMsg"` // 撤回消息提示内容
 
 	IsFriendOnlineNotify bool `json:"isFriendOnlineNotify"` // 好友上线提醒
 	IsOnline             bool `json:"isOnline"`             // 是否在线

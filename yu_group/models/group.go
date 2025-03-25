@@ -7,11 +7,12 @@ import (
 
 type GroupModel struct {
 	models.Model
-	GroupName     string `json:"groupName"`
-	GroupAbstract string `json:"groupAbstract"` // 简介
-	GroupAvatar   string `json:"groupAvatar"`
-	GroupCreator  string `json:"groupCreator"`
-	GroupSize     int    `json:"groupSize"` // 群聊规模 20 100 200 1000
+	GroupName     string `gorm:"size:32" json:"groupName"`
+	GroupAbstract string `gorm:"size:128" json:"groupAbstract"` // 简介
+	GroupAvatar   string `gorm:"size:256" json:"groupAvatar"`
+
+	GroupCreator uint ` json:"groupCreator"`
+	GroupSize    int  `json:"groupSize"` // 群聊规模 20 100 200 1000
 
 	GroupIsSearch     bool `json:"groupIsSearch"`     // 是否可以搜索加群
 	GroupIsInvite     bool `json:"groupIsInvite"`     // 是否可邀请人加入
@@ -20,4 +21,9 @@ type GroupModel struct {
 
 	GroupVerify         cverify.VerifyType            `json:"groupVerify"` // 0不允许添加 1验证消息 2回答问题 4需要正确回答问题
 	GroupVerifyQuestion *cverify.VerificationQuestion `json:"groupVerifyQuestion"`
+}
+
+func (GroupModel) TableName() string {
+	return "group"
+
 }

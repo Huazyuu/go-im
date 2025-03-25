@@ -1,10 +1,10 @@
 package cmsg
 
-import "time"
-
-type SysMsg struct {
-	Type uint8 `json:"type"` // 违规 1:黄 2:恐 3:政 4:不正当言论
-}
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"time"
+)
 
 type MsgType int8
 
@@ -23,18 +23,6 @@ const (
 )
 
 // Msg 定义消息，包含不同类型消息的通用信息
-// 消息类型说明：
-// 1: text 文本消息
-// 2: img 图片消息
-// 3: video 视频消息
-// 4: file 文件消息
-// 5: voice 语音消息
-// 6: voice_call 语音通话消息
-// 7: video_call 视频通话消息
-// 8: withdraw 撤回消息
-// 9: replyMsg 回复消息
-// 10: quoteMsg 引用消息
-// 11: @ 用户的消息（群聊才有）
 type Msg struct {
 	Type         MsgType       `json:"type"`         // 消息类型，和 msgType 一致
 	Content      *string       `json:"content"`      // 文本消息，当消息类型为 1 时使用
@@ -48,6 +36,17 @@ type Msg struct {
 	ReplyMsg     *ReplyMsg     `json:"replyMsg"`     // 回复消息
 	QuoteMsg     *QuoteMsg     `json:"quoteMsg"`     // 引用消息
 	AtMsg        *AtMsg        `json:"atMsg"`        // @ 用户的消息，群聊时使用
+}
+
+// Scan 取出来的时候的数据
+func (c *Msg) Scan(val interface{}) error {
+	return json.Unmarshal(val.([]byte), c)
+}
+
+// Value 入库的数据
+func (c *Msg) Value() (driver.Value, error) {
+	b, err := json.Marshal(*c)
+	return string(b), err
 }
 
 // ImgMsg 定义图片消息
