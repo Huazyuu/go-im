@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"gorm.io/gorm"
 	"server/utils/jwt"
 	"server/utils/pwd"
 	"server/yu_auth/auth_models"
@@ -31,8 +32,8 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.LoginResponse, err error) {
 	// 查找用户
 	var user auth_models.UserModel
-	err = l.svcCtx.DB.Where("id = ?", req.Username).Take(&user).Error
-	if err != nil {
+	err = l.svcCtx.DB.Where("user_name = ?", req.Username).Take(&user).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, errors.New("用户名或密码错误")
 	}
 	// 检查密码
@@ -42,7 +43,7 @@ func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.LoginResponse, 
 	// gen token
 	token, err := jwt.GenerateToken(jwt.JwtPayload{
 		UserID:   user.ID,
-		Nickname: user.UserNickname,
+		Username: user.UserName,
 		Role:     user.UserRole,
 	}, l.svcCtx.Config.Auth.AccessSecret, l.svcCtx.Config.Auth.AccessExpire)
 	if err != nil {

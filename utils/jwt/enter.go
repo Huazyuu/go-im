@@ -8,7 +8,7 @@ import (
 
 type JwtPayload struct {
 	UserID   uint   `json:"user_id"`
-	Nickname string `json:"nickname"`
+	Username string `json:"username"`
 	Role     int8   `json:"role"`
 }
 
