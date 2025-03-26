@@ -40,3 +40,6 @@ dump/es/
 
 # docker data
 data
+
+# go test
+*_test.go

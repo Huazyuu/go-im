@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.chat</OriginalElement>
+  <nodes>
+    <node x="1071.3524942338431" y="-835.2573289111638">f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.chat</node>
+    <node x="344.9112003835604" y="-919.6570544105593">f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.group_msg</node>
+    <node x="305.3784229001301" y="-305.1010145206438">f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.group_verify</node>
+    <node x="1391.0656954502501" y="77.87832881752797">f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.user_conf</node>
+    <node x="766.0952923504337" y="-543.4875959861583">f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.group</node>
+    <node x="1296.7511814272066" y="-438.64193586710087">f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.user</node>
+    <node x="1740.7102890618407" y="-212.4032107453308">f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.friends</node>
+    <node x="1794.3830966130754" y="-703.3083655378115">f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.friend_verify</node>
+    <node x="700.002381896742" y="175.72645609416918">f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.chat_member</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.friend_verify" target="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.user" relationship="REFERENCES">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.group_msg" target="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.group" relationship="REFERENCES">
+      <point x="0.0" y="0.0" />
+      <point x="467.8512470440792" y="-779.3682893612854" />
+      <point x="479.33760415160395" y="-739.883025623682" />
+      <point x="516.8022031137931" y="-648.1466325146832" />
+      <point x="565.3377020141627" y="-567.5438445976976" />
+      <point x="623.023753977613" y="-499.3081899949501" />
+      <point x="687.8112066508631" y="-444.39379113409916" />
+      <point x="757.5594248058608" y="-403.4627471023739" />
+      <point x="815.4564030323907" y="-381.0394989914615" />
+      <point x="873.9932100844476" y="-367.84902955398275" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.user_conf" target="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.user" relationship="REFERENCES">
+      <point x="0.0" y="0.0" />
+      <point x="1512.7001194570967" y="223.77884517243365" />
+      <point x="1533.5068644333533" y="104.48378061070594" />
+      <point x="1534.3408250160226" y="8.519749236518521" />
+      <point x="1521.00880996747" y="-82.28751770211613" />
+      <point x="1494.5270584310992" y="-166.17270813820488" />
+      <point x="1456.113605541888" y="-241.51934309563913" />
+      <point x="1407.1690014945107" y="-306.88163619194484" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.friends" target="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.user" relationship="REFERENCES">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.chat_member" target="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.group" relationship="REFERENCES">
+      <point x="0.0" y="0.0" />
+      <point x="797.7806353980935" y="229.4864973391401" />
+      <point x="769.5195976326188" y="152.23388420450908" />
+      <point x="748.84867789481" y="56.45753803723608" />
+      <point x="743.8422565428273" y="-36.26353544957789" />
+      <point x="753.5448201254752" y="-123.72782512115731" />
+      <point x="776.7154553643629" y="-203.90984944190126" />
+      <point x="803.9495748052605" y="-261.5850982730666" />
+      <point x="837.974896671383" y="-312.6153337677937" />
+      <point x="877.8365952040663" y="-356.2903625874285" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.group_verify" target="f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.group" relationship="REFERENCES">
+      <point x="0.0" y="0.0" />
+      <point x="442.71176222869315" y="-194.35193605850202" />
+      <point x="867.0236336425" y="-358.8025548911347" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="径向" zoom="0.6053837342497136" showDependencies="false" x="1412.561967833491" y="-245.0" />
+  <SelectedNodes>
+    <node>f27b6956-823f-49cb-b3a0-28cb42918bef.TABLE:fim_server_db.chat</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>列</Category>
+    <Category>键列</Category>
+  </Categories>
+</Diagram>
+
