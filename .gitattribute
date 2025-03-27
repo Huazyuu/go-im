@@ -1,0 +1,6 @@
+# Go 文件和 Go 模板文件
+*.go linguist-language=Go
+*.tpl linguist-language=Go
+
+# 排除 Canvas 模板文件
+canvas.tpl linguist-language=Canvas Template

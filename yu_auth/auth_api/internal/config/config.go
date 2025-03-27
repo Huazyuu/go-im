@@ -1,6 +1,8 @@
 package config
 
-import "github.com/zeromicro/go-zero/rest"
+import (
+	"github.com/zeromicro/go-zero/rest"
+)
 
 type Config struct {
 	rest.RestConf
@@ -15,5 +17,20 @@ type Config struct {
 		Addr     string
 		Password string
 		DB       int
+	}
+	OpenLoginList []struct {
+		Name string
+		Icon string
+		Href string
+	}
+	GitHub struct {
+		ClientID     string
+		ClientSecret string
+		Redirect     string
+	}
+	Gitee struct {
+		ClientID     string
+		ClientSecret string
+		Redirect     string
 	}
 }

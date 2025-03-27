@@ -13,6 +13,7 @@ type UserModel struct {
 	UserIP       string `gorm:"size:32" json:"userIP"`
 	UserAddr     string `gorm:"size:64" json:"userAddr"`
 	UserRole     int8   `json:"userRole"` // 1管理 2普通
+	OpenID       string `gorm:"size:128" json:"open_id"`
 }
 
 func (UserModel) TableName() string {

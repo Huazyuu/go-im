@@ -1,34 +1,40 @@
 type LoginRequest {
-    Username string `json:"username"`
-    Password string `json:"password"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
+//type OpenLoginRequest {
+// Flag string `form:"flag"` // 登录标志,表示是什么登录
+//}
 type LoginResponse {
-    Token string `json:"token"`
+	Token string `json:"token"`
 }
 
 type OpenLoginInfoResponse {
-    Name string `json:"name"`
-    Icon string `json:"icon"`
-    Href string `json:"href"` // 跳转地址
+	Name string `json:"name"`
+	Icon string `json:"icon"`
+	Href string `json:"href"` // 跳转地址
 }
 
 service auth {
-    @handler login
-    post /api/auth/login (LoginRequest) returns (LoginResponse) // 登录接口
+	@handler login
+	post /api/auth/login (LoginRequest) returns (LoginResponse) // 登录接口
 
-    @handler authentication
-    post /api/auth/authentication returns (string) // 认证接口
+	@handler authentication
+	post /api/auth/authentication returns (string) // 认证接口
 
-    @handler logout
-    post /api/auth/logout returns (string) // 注销
+	@handler logout
+	post /api/auth/logout returns (string) // 注销
 
-    @handler open_login_info
-    get /api/auth/open_login returns ([]OpenLoginInfoResponse) // 第三方登录的信息
+	@handler open_login_info
+	get /api/auth/open_login_info returns ([]OpenLoginInfoResponse) // 第三方登录的信息
 
-    @handler open_login
-    post /api/auth/open_login returns (LoginResponse) // 第三方登录
+	@handler open_login
+	get /api/auth/open_login returns (LoginResponse) // 第三方登录
+
+	@handler login_gitee
+	get /api/auth/login_gitee returns (string)
 }
 
-    // 使用自定义tpl生成
-    // goctl api go -api auth_api.api -dir . --home ../../template
+// 使用自定义tpl生成
+// goctl api go -api auth_api.api -dir . --home ../../template
