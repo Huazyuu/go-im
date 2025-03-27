@@ -32,6 +32,7 @@ service auth {
 	@handler open_login
 	get /api/auth/open_login returns (LoginResponse) // 第三方登录
 
+	// 第三方登录跳转,需要新的写新接口就行
 	@handler login_gitee
 	get /api/auth/login_gitee returns (string)
 }

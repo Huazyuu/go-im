@@ -43,3 +43,5 @@ data
 
 # go test
 *_test.go
+
+template
