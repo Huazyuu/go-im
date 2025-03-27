@@ -38,4 +38,4 @@ service auth {
 }
 
 // 使用自定义tpl生成
-// goctl api go -api auth_api.api -dir . --home ../../template
+// goctl api go -api auth_api.api -dir . --home ../../template --style go_zero

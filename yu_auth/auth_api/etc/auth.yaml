@@ -2,6 +2,12 @@ Name: auth
 Host: 0.0.0.0
 Port: 20261
 
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: userrpc.rpc
+
 Mysql:
   dataSource: root:123456@tcp(127.0.0.1:3307)/im_server_db?charset=utf8mb4&parseTime=True&loc=Local
 
@@ -32,7 +38,7 @@ GitHub:
   ClientID: Ov23licVD5NXBlp7mUvB
   ClientSecret: 810168cc62886c71f009e16a12f0eedb385f08cd
   Redirect: http://127.0.0.1:20261/api/auth/open_login
-  
+
 Gitee:
   ClientID: 0f3991a85863754732116967f5c7ad9b01d5050f35eda5e3462c796a69e245b8
   ClientSecret: 5521350fd001dba855a6f5e9cef7d0542f240142ed2354b0e604ca9a9e9877cb
