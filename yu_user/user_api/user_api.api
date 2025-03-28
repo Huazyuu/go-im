@@ -1,0 +1,32 @@
+syntax = "v1"
+
+info (
+	title:   "user api"
+	desc:    "user api"
+	author:  "zyuu"
+	email:   "zyuuforyu@gmail.com"
+	version: "v0.1"
+)
+
+// 用户信息api
+type UserInfoRequest {
+	UserID uint `header:"User-ID"`
+	Role   int8 `header:"Role"`
+}
+
+type UserInfoResponse {
+	UserID         uint   `json:"userID"`
+	UserRole       int8   `json:"userRole"`
+	UserName       string `json:"userName"`
+	UserNickname   string `json:"userNickname"`
+	UserAbstract   string `json:"userAbstract"`
+	UserAvatar     string `json:"userAvatar"`
+	RegisterSource string `json:"registerSource"`
+}
+
+service user {
+	@handler UserInfo
+	get /api/user/user_info (UserInfoRequest) returns (UserInfoResponse) // 用户信息接口
+}
+
+// goctl api go -api user_api.api -dir . --home ../../template

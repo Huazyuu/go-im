@@ -1,0 +1,26 @@
+sequenceDiagram
+    actor 用户
+    participant 网关
+    participant 认证服务
+    participant 业务服务
+
+    用户 ->> 网关: 1. 发送请求\n（如：/api/user/profile）
+    Note right of 网关: 步骤1：接收所有外部请求
+    
+    网关 ->> 认证服务: 2. 鉴权检查\n（携带Token/Headers）
+    Note right of 认证服务: 步骤2：验证权限\n校验请求路径合法性
+    
+    认证服务 -->> 网关: 3. 返回鉴权结果\n（200/401）
+    Note left of 网关: 步骤3：处理认证响应
+    
+    alt 认证通过
+        网关 ->> 业务服务: 4. 路由请求\n（根据路径分发）
+        Note right of 业务服务: 步骤4：处理具体业务逻辑\n（如用户服务）
+        
+        业务服务 -->> 网关: 5. 返回业务数据
+        Note left of 网关: 步骤5：统一响应格式
+        
+        网关 -->> 用户: 6. 返回最终结果\n（200 + 业务数据）
+    else 认证失败
+        网关 -->> 用户: ❌ 直接返回错误\n（401 Unauthorized）
+    end

@@ -1,0 +1,24 @@
+Name: user
+Host: 0.0.0.0
+Port: 20262
+Log:
+  serviceName: Auth-api
+  encoding: plain
+  timeFormat: 2006-01-02 15:04:05
+  stat: false
+
+Etcd: 127.0.0.1:2379
+Redis:
+  addr: 127.0.0.1:6379
+  password:
+  db: 1
+Mysql:
+  dataSource: root:123456@tcp(127.0.0.1:3307)/im_server_db?charset=utf8mb4&parseTime=True&loc=Local
+
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: userrpc.rpc
+    
+
