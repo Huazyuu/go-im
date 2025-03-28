@@ -17,7 +17,6 @@ type UserModel struct {
 	RegisterSource string `gorm:"size:32" json:"register_source"`
 }
 
-func (UserModel) TableName() string
 func (UserModel) TableName() string {
 	return "user"
 }

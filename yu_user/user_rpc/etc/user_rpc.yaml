@@ -2,8 +2,19 @@ Name: userrpc.rpc
 ListenOn: 0.0.0.0:8080
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+    - 127.0.0.1:2379
   Key: userrpc.rpc
 
 Mysql:
   dataSource: root:123456@tcp(127.0.0.1:3307)/im_server_db?charset=utf8mb4&parseTime=True&loc=Local
+
+Log:
+  serviceName: Auth-api
+  encoding: plain
+  timeFormat: 2006-01-02 15:04:05
+  stat: false
+
+RedisRpc:
+  Addr: 127.0.0.1:6379
+  Password:
+  DB: 1

@@ -1,3 +1,3 @@
 # YU-IM Server
 ## 技术选型
-grpc go-zero websocket redis kafka
+go-zero grpc websocket docker-compose redis kafka mysql nginx 

@@ -2,6 +2,7 @@ package core
 
 import (
 	"context"
+	"fmt"
 	"github.com/go-redis/redis"
 	"time"
 )
@@ -20,5 +21,6 @@ func InitRedis(addr, pwd string, db int) *redis.Client {
 		panic(err)
 		return nil
 	}
+	fmt.Println("连接redis成功")
 	return client
 }
