@@ -4,11 +4,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/go-redis/redis"
 	"server/utils/jwt"
+	"server/utils/ulist"
+
+	"server/yu_auth/auth_api/internal/svc"
+	"server/yu_auth/auth_api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
-	"server/yu_auth/auth_api/internal/svc"
 )
 
 type AuthenticationLogic struct {
@@ -25,22 +27,35 @@ func NewAuthenticationLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Au
 	}
 }
 
-func (l *AuthenticationLogic) Authentication(token string) (resp string, err error) {
-	if token == "" {
-		return "", errors.New("请传入token")
+func (l *AuthenticationLogic) Authentication(req *types.AuthenticationRequest) (resp *types.AuthenticationReponse, err error) {
+	if ulist.InList(l.svcCtx.Config.WhiteList, req.ValidPath) {
+		logx.Infof("%s 在白名单中", req.ValidPath)
+		return
 	}
 
-	_, err = jwt.ParseToken(token, l.svcCtx.Config.Auth.AccessSecret)
+	if req.Token == "" {
+		logx.Error("token为空")
+		err = errors.New("认证失败")
+		return
+	}
+
+	claims, err := jwt.ParseToken(req.Token, l.svcCtx.Config.Auth.AccessSecret)
 	if err != nil {
-		return "", errors.New("认证失败")
+		logx.Error(err.Error())
+		err = errors.New("认证失败")
+		return
 	}
 
-	// 是否在注销redis
-	key := fmt.Sprintf("logout_%s", token)
-	_, err = l.svcCtx.Redis.Get(key).Result()
-	if !errors.Is(err, redis.Nil) {
-		return "", errors.New("认证失败,认证过期")
+	_, err = l.svcCtx.Redis.Get(fmt.Sprintf("logout_%s", req.Token)).Result()
+	if err == nil {
+		logx.Error("在黑名单中")
+		err = errors.New("认证失败")
+		return
 	}
-	resp = "认证通过"
-	return resp, nil
+
+	res := &types.AuthenticationReponse{
+		UserID: claims.UserID,
+		Role:   int(claims.Role),
+	}
+	return res, nil
 }

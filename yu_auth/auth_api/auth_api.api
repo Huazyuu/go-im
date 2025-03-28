@@ -3,9 +3,6 @@ type LoginRequest {
 	Password string `json:"password"`
 }
 
-//type OpenLoginRequest {
-// Flag string `form:"flag"` // 登录标志,表示是什么登录
-//}
 type LoginResponse {
 	Token string `json:"token"`
 }
@@ -16,12 +13,22 @@ type OpenLoginInfoResponse {
 	Href string `json:"href"` // 跳转地址
 }
 
+type AuthenticationRequest {
+	Token     string `header:"token,optional"`
+	ValidPath string `header:"validPath,optional"`
+}
+
+type AuthenticationReponse {
+	UserID uint `json:"userID"`
+	Role   int  `json:"role"`
+}
+
 service auth {
 	@handler login
 	post /api/auth/login (LoginRequest) returns (LoginResponse) // 登录接口
 
 	@handler authentication
-	post /api/auth/authentication returns (string) // 认证接口
+	post /api/auth/authentication (AuthenticationRequest) returns (AuthenticationReponse) // 认证接口
 
 	@handler logout
 	post /api/auth/logout returns (string) // 注销

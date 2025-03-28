@@ -1,2 +1,6 @@
-# 网关选用nginx或go都可以,二选一
 addr: 127.0.0.1:9001
+etcd: 127.0.0.1:2379
+Log:
+  Encoding: plain
+  TimeFormat: 2006-01-02 15:04:05
+  Stat: false

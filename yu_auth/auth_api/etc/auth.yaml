@@ -15,6 +15,19 @@ Auth:
   accessSecret: xmsafuwanslmapqascmskawis
   accessExpire: 365
 
+# 不需要鉴权的白名单 正则
+WhiteList:
+  - /api/auth/login
+  - /api/auth/open_login
+  - /api/auth/login_gitee
+#  - /api/auth/open_login_info
+  - /api/auth/authentication
+  - /api/auth/logout
+  #  uuid
+  - /api/file/.{8}-.{4}-.{4}-.{4}-.{12}
+  - /api/settings/open_login
+  - /api/settings/info
+
 Log:
   serviceName: Auth-api
   encoding: plain

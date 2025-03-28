@@ -19,6 +19,8 @@ type Config struct {
 		AccessExpire int
 	}
 
+	WhiteList []string // 白名单
+
 	Redis struct {
 		Addr     string
 		Password string
