@@ -19,7 +19,6 @@ func (c *VerificationQuestion) Scan(val interface{}) error {
 	return json.Unmarshal(val.([]byte), c)
 }
 
-// Value 入库的数
 // Value 入库的数据
 func (c VerificationQuestion) Value() (driver.Value, error) {
 	b, err := json.Marshal(c)
