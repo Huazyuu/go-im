@@ -22,7 +22,7 @@ type UserConfModel struct {
 
 	SearchUser int8 `json:"searchUser"` // 查到到我的方式 0不允许别人查找 1用户号查 2可以用昵称
 
-	Verification         cverify.VerifyType            `json:"verification"`         // 好友验证 0不允许添加 1验证消息 2回答问题 4需要正确回答问题
+	Verification         int8                          `json:"verification"`         // 好友验证 0不允许添加 1验证消息 2回答问题 4需要正确回答问题
 	VerificationQuestion *cverify.VerificationQuestion `json:"verificationQuestion"` // 验证问题 3,4需要
 }
 

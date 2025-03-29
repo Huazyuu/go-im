@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"gorm.io/gorm"
 	"server/yu_user/user_models"
 
@@ -28,11 +29,19 @@ func NewUserCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserCr
 
 func (l *UserCreateLogic) UserCreate(in *user_rpc.UserCreateRequest) (*user_rpc.UserCreateResponse, error) {
 
+	// 开启事务
+	tx := l.svcCtx.DB.Begin()
+	if tx.Error != nil {
+		return nil, errors.New("开启事务失败")
+	}
+
 	var user user_models.UserModel
-	err := l.svcCtx.DB.Where("user_name=?", in.Username).Take(&user).Error
+	err := tx.Where("user_name=?", in.Username).Take(&user).Error
 	if !errors.Is(err, gorm.ErrRecordNotFound) {
+		tx.Rollback()
 		return nil, errors.New("该用户已存在")
 	}
+
 	user = user_models.UserModel{
 		UserName:       in.Username,
 		UserNickname:   in.Username,
@@ -42,10 +51,35 @@ func (l *UserCreateLogic) UserCreate(in *user_rpc.UserCreateRequest) (*user_rpc.
 		OpenID:         in.OpenId,
 		RegisterSource: in.RegisterSource,
 	}
-	err = l.svcCtx.DB.Create(&user).Error
+
+	err = tx.Create(&user).Error
 	if err != nil {
+		tx.Rollback()
 		logx.Error(err)
 		return nil, errors.New("创建用户失败")
+	}
+
+	fmt.Println(user)
+
+	err = tx.Create(&user_models.UserConfModel{
+		UserID:               user.ID,
+		RecallMsg:            nil,
+		IsFriendOnlineNotify: false,
+		IsOnline:             true, // 用户在线
+		IsSound:              false,
+		IsSecureLink:         false,
+		IsSavePwd:            false, // 不保存密码
+		SearchUser:           2,     // id 昵称搜索
+		Verification:         2,     // 需要验证
+	}).Error
+	if err != nil {
+		tx.Rollback()
+		return nil, errors.New("创建用户失败")
+	}
+
+	// 提交事务
+	if err := tx.Commit().Error; err != nil {
+		return nil, errors.New("提交事务失败")
 	}
 	return &user_rpc.UserCreateResponse{
 		Username: user.UserName,

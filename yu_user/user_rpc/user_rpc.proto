@@ -12,14 +12,24 @@ message UserCreateRequest{
   string open_id = 6;
   string register_source = 7;
 }
-
 message UserCreateResponse{
   string username = 1;
-  int32  user_id =2;
+  int32  user_id = 2;
 }
+
+
+message UserInfoRequest{
+  int32 user_id = 1;
+}
+message UserInfoResponse{
+  bytes data = 1;
+}
+
+
 
 service User {
   rpc UserCreate(UserCreateRequest)returns(UserCreateResponse);
+  rpc UserInfo(UserInfoRequest)returns(UserInfoResponse);
 }
 
 // goctl rpc protoc user_rpc.proto --go_out=./types --go-grpc_out=./types --zrpc_out=. --style=go_zero

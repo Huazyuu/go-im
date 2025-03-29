@@ -78,7 +78,6 @@ func (l *Open_loginLogic) Open_login(code string) (resp *types.LoginResponse, er
 		user.ID = uint(res.UserId)
 		user.UserRole = 2
 		user.UserName = info.Username
-
 	}
 
 	token, err := jwt.GenerateToken(jwt.JwtPayload{

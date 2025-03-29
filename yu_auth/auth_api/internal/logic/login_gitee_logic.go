@@ -38,14 +38,6 @@ func (l *Login_giteeLogic) Login_gitee() (resp string, err error) {
 	params.Add("redirect_uri", conf.Redirect)
 	params.Add("response_type", "code")
 
-	// 可选：添加scope参数（根据需要）
-	// params.Add("scope", "user_info")
-
-	// 可选：添加state参数防止CSRF
-	// state := generateStateToken()
-	// params.Add("state", state)
-	// 需要存储state到session或redis验证回调请求
-
 	authURL := fmt.Sprintf("%s?%s", baseURL, params.Encode())
 	return authURL, nil
 }

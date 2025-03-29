@@ -19,7 +19,7 @@ type GroupModel struct {
 	GroupIsTmpSession bool `json:"groupIsTmpSession"` // 是否可以开启临时消息
 	GroupIsProhibit   bool `json:"groupIsProhibit"`   // 是否全员禁言
 
-	GroupVerify         cverify.VerifyType            `json:"groupVerify"` // 0不允许添加 1验证消息 2回答问题 4需要正确回答问题
+	GroupVerify         int8                          `json:"groupVerify"` // 0不允许添加 1验证消息 2回答问题 4需要正确回答问题
 	GroupVerifyQuestion *cverify.VerificationQuestion `json:"groupVerifyQuestion"`
 }
 
